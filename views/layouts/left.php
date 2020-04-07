@@ -19,6 +19,8 @@
                 'options' => ['class' => 'sidebar-menu tree', 'data-widget'=> 'tree'],
                 'items' => [
                     ['label' => 'Menu', 'options' => ['class' => 'header']],
+                    ['label' => 'Members', 'icon' => 'users', 'url' => ['/member']],
+                    ['label' => 'Reports', 'icon' => 'dashboard', 'url' => ['/refill-balance']],
                     [
                         'label' => 'Tools',
                         'icon' => 'share',

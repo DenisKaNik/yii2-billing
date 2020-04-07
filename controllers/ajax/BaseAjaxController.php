@@ -47,11 +47,17 @@ class BaseAjaxController extends Controller
             'ajax' => [
                 'class' => AjaxAccess::class,
                 'actions' => [
+                    'post',
+                    'active',
+                    'inactive',
                 ],
             ],
             'verbs' => [
                 'class' => VerbFilter::class,
                 'actions' => [
+                    'post' => ['POST'],
+                    'active' => ['PUT'],
+                    'inactive' => ['PUT'],
                 ],
             ],
         ];

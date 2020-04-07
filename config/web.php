@@ -42,6 +42,11 @@ $config = [
             'enableStrictParsing' => true,
             'rules' => [
                 '' => 'site/index',
+                'GET member' => 'member/index',
+                'POST member' => 'ajax/member/post',
+                'PUT member-status/<id:\d+>/<_a:(active|inactive)>' => 'ajax/member/<_a>',
+                'GET refill-balance' => 'refill-balance/index',
+                'POST refill-balance' => 'ajax/member/refill-balance',
             ],
         ],
     ],
