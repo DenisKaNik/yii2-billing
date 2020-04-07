@@ -42,6 +42,7 @@ $directoryAsset = Yii::$app->assetManager->getPublishedUrl('@vendor/almasaeed201
 </div>
 
 <?php $this->endBody() ?>
+<script src="/js/backend.js"></script>
 </body>
 </html>
 <?php $this->endPage() ?>

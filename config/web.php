@@ -11,6 +11,9 @@ $config = [
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
+        '@billing' => '@app/billing',
+        '@components' => '@app/components',
+        '@traits' => '@app/traits',
     ],
     'components' => [
         'request' => [
@@ -36,7 +39,9 @@ $config = [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
+            'enableStrictParsing' => true,
             'rules' => [
+                '' => 'site/index',
             ],
         ],
     ],
