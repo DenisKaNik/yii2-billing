@@ -50,6 +50,7 @@ class BaseAjaxController extends Controller
                     'post',
                     'active',
                     'inactive',
+                    'report',
                 ],
             ],
             'verbs' => [
@@ -58,6 +59,7 @@ class BaseAjaxController extends Controller
                     'post' => ['POST'],
                     'active' => ['PUT'],
                     'inactive' => ['PUT'],
+                    'report' => ['POST'],
                 ],
             ],
         ];

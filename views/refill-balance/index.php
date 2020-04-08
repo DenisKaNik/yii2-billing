@@ -11,6 +11,8 @@ $this->title = 'Refill Balances';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
+<?= $this->render('_search'); ?>
+
 <div class="refill-balance-index box box-primary">
     <div class="box-body table-responsive no-padding">
         <?= GridView::widget([

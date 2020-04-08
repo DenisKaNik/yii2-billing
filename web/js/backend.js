@@ -43,6 +43,14 @@ project.extend("common", {
         $("[data-action='REFILL-BALANCE']").on('click', function(){
             self.refillBalance($(this).parents('form'));
         });
+
+        $("[data-action='GENERATE-REPORT']").on('click', function(){
+            self.generateReport($(this).parents('form'));
+        });
+
+        $("[data-action='REFILL_BALANCE-CANCEL']").on('click', function(){
+            self.refillBalanceCancel($(this).attr('data-value'));
+        });
     },
 
     memberSave: function(form) {
@@ -97,6 +105,10 @@ project.extend("common", {
     },
 
     refillBalance: function(form) {
+        $('.has-error')
+            .removeClass('has-error')
+            .find('.help-block').text('');
+
         $.ajax({
             url: '/refill-balance',
             type: "POST",
@@ -118,8 +130,6 @@ project.extend("common", {
             error: function(data) {
                 if (data.responseJSON) {
                     if (data.responseJSON.errors !== undefined) {
-                        $('.field-refillbalanceform-error').find('.help-block').text('');
-
                         $.each(data.responseJSON.errors, function(field, val) {
                             let input = $('.field-refillbalanceform-' + field);
                             if (input.length) {
@@ -134,6 +144,74 @@ project.extend("common", {
 
         return false;
     },
+
+    generateReport: function(form) {
+        $('.has-error')
+            .removeClass('has-error')
+            .find('.help-block').text('');
+
+        $.ajax({
+            url: '/refill-balance/report',
+            type: "POST",
+            data: new FormData(form[0]),
+            contentType: false,
+            dataType: "json",
+            processData: false,
+            cache: false,
+            success: function(data) {
+                if (data.success && data.redirect_url) {
+                    document.location.href = data.redirect_url;
+                }
+            },
+            error: function(data) {
+                if (data.responseJSON) {
+                    if (data.responseJSON.errors !== undefined) {
+                        $.each(data.responseJSON.errors, function(field, val) {
+                            let fieldForm = $('.field-reportform-' + field);
+                            if (fieldForm.length) {
+                                fieldForm.addClass('has-error')
+                                    .find('.help-block').text(val[0]);
+                            }
+                        });
+                    }
+                }
+            }
+        });
+
+        return false;
+    },
+
+    refillBalanceCancel: function (id) {
+        $.ajax({
+            url: '/refill-balance/' + id + '/cancel',
+            type: "PUT",
+            contentType: false,
+            dataType: "json",
+            processData: false,
+            cache: false,
+            success: function(data) {
+                if (data.success) {
+                    let $tr = $('tr[data-key="' + id + '"]'),
+                        $total = $('.totalSum');
+
+                    $tr
+                        .find('.cell-sum').html(data.sum ? '<s>' + data.sum + '</s>' : '')
+                        .end()
+                        .find('.cell-status').html(data.statusLabel)
+                        .end()
+                        .find('.cell-btn_cancel button').remove();
+
+                    $total.text(parseFloat($total.text()) - parseFloat(data.sum ?? 0));
+                }
+
+            },
+            error: function(data) {
+                //
+            }
+        });
+
+        return false;
+    }
 
 });
 

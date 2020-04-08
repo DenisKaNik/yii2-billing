@@ -17,7 +17,7 @@ use yii\db\ActiveRecord;
  */
 class RefillBalance extends ActiveRecord
 {
-    const STATUS_CANCEL = 0;
+    const STATUS_CANCELED = 0;
     const STATUS_SUCCESS = 1;
 
     public static function create(float $sum): self
@@ -27,6 +27,11 @@ class RefillBalance extends ActiveRecord
         $refillBalance->status = self::STATUS_SUCCESS;
         $refillBalance->created_at = time();
         return $refillBalance;
+    }
+
+    public function cancel()
+    {
+        $this->status = self::STATUS_CANCELED;
     }
 
     /**

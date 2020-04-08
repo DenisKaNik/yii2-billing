@@ -3,6 +3,8 @@
 namespace app\controllers;
 
 use billing\entities\RefillBalance;
+use billing\forms\RefillBalanceSearch;
+use Yii;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 
@@ -22,6 +24,17 @@ class RefillBalanceController extends Controller
         ]);
 
         return $this->render('index', [
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    public function actionReport()
+    {
+        $searchModel = new RefillBalanceSearch();
+        $dataProvider = $searchModel->search($request = Yii::$app->request->queryParams);
+
+        return $this->render('report', [
+            'request' => $request,
             'dataProvider' => $dataProvider,
         ]);
     }

@@ -1,5 +1,8 @@
 <?php
-use yii\helpers\Html;
+use yii\helpers\{
+    Html,
+    Url
+};
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -42,6 +45,13 @@ $directoryAsset = Yii::$app->assetManager->getPublishedUrl('@vendor/almasaeed201
 </div>
 
 <?php $this->endBody() ?>
+<?php
+    if (strpos(Url::current(), '/refill-balance') !== false) {
+        echo '<script src="/js/moment.min.js"></script>'
+            .'<script src="/js/daterangepicker.js"></script>'
+            .'<script src="/js/jquery.inputmask.bundle.js"></script>';
+    }
+?>
 <script src="/js/backend.js"></script>
 </body>
 </html>

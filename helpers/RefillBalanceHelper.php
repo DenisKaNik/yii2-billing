@@ -14,7 +14,7 @@ class RefillBalanceHelper
     {
         return [
             RefillBalance::STATUS_SUCCESS => 'Success',
-            RefillBalance::STATUS_CANCEL => 'Cancel',
+            RefillBalance::STATUS_CANCELED => 'Canceled',
         ];
     }
 
@@ -29,7 +29,7 @@ class RefillBalanceHelper
             case RefillBalance::STATUS_SUCCESS:
                 $class = 'label label-success';
                 break;
-            case RefillBalance::STATUS_CANCEL:
+            case RefillBalance::STATUS_CANCELED:
                 $class = 'label label-danger';
                 break;
             default:
@@ -38,5 +38,15 @@ class RefillBalanceHelper
         }
 
         return Html::tag('span', self::statusName($status), ['class' => $class]);
+    }
+
+    public static function formatterDate($raw_date): array
+    {
+        list($from, $to) = explode(' - ', $raw_date);
+
+        return [
+            'from' => $from,
+            'to' => $to,
+        ];
     }
 }
