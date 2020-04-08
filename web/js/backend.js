@@ -192,7 +192,8 @@ project.extend("common", {
             success: function(data) {
                 if (data.success) {
                     let $tr = $('tr[data-key="' + id + '"]'),
-                        $total = $('.totalSum');
+                        $total = $('.totalSum'),
+                        totalCalc = parseFloat($total.text()) - parseFloat(data.sum ?? 0);
 
                     $tr
                         .find('.cell-sum').html(data.sum ? '<s>' + data.sum + '</s>' : '')
@@ -201,7 +202,7 @@ project.extend("common", {
                         .end()
                         .find('.cell-btn_cancel button').remove();
 
-                    $total.text(parseFloat($total.text()) - parseFloat(data.sum ?? 0));
+                    $total.text(totalCalc.toFixed(2));
                 }
 
             },
