@@ -13,6 +13,8 @@ $config = [
         '@npm'   => '@vendor/npm-asset',
         '@tests' => '@app/tests',
         '@traits' => '@app/traits',
+        '@billing' => '@app/billing',
+        '@fixtures' => '@app/fixtures',
     ],
     'components' => [
         'cache' => [
